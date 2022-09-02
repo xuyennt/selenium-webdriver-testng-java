@@ -5,10 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-public class Topic_05_Web_Browser {
+public class Topic_05b_Web_Browser_element {
 	
 //khaib báo biến đại diện cho thư viện selenium webdriver	
 WebDriver driver;
@@ -31,50 +32,36 @@ driver.manage().window().maximize();
 
 }
 @Test
-public void TC_01_Browser() {
-	//dong trinh duyet hien tai(1 tab)
-	driver.close();
-    
-	// dong browser nhieu tab
-	driver.quit();
+public void TC_01_Current_Url() {
+	driver.get("http://live.techpanda.org/");
 	
-	// tim 1 element
-	driver.findElement(By.cssSelector(""));
+	driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
 	
-	// tim nhieiu element
-	driver.findElements(By.cssSelector(""));
+	//String loginPageUrl = driver.getCurrentUrl();
 	
-	// mo ra cai url truyen vao
-	driver.get("");
+	//kiem tra dau vào đầu ra nó bằng nhau 
+	Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/login/");
 	
-	//tra ve 1 url tai page dang dung
-	driver.getCurrentUrl();
+	driver.findElement(By.xpath("//a[@title='Create an Account']")).click();
 	
-	//source code cua page hien tai
-	driver.getPageSource();
-	
-	// lay ra id cua tab/ window dang dung/active (windows/tab)
-	driver.getWindowHandle();//1
-	driver.getWindowHandles(); //all
-	
-	// cho element duoc tim thay trong khoang time xxs
-	driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-	
-	
+	Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/create/");
     
 }
 
 
 @Test
-public void TC_02_Element() {
+public void TC_02_Page_Title() {
 	//xoa du lieu trong 1 filed dang editable (co the nhap )
 	// textbox/ text Area /
-	element.clear();
+//	element.clear();
 }
 @Test
-public void TC_03() {
+public void TC_03_Navigation() {
 
 	}
+public void TC_04_Page_Source() {
+
+}
 
 @AfterClass
 public void afterClass() {
