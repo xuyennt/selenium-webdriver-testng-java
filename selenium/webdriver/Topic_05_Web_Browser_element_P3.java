@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -125,9 +126,34 @@ public class Topic_05_Web_Browser_element_P3 {
 		
 		
 	}
+	@Test
+	public void TC_04_MailChimp() {
+		driver.get("https://login.mailchimp.com/signup/");
+		
+		driver.findElement(By.cssSelector("input#email")).sendKeys("automationfc@gmail.net");
+		sleepInSecond(3);
+		
+		WebElement passwordTextbox = driver.findElement(By.cssSelector("input#new_password"));
+		
+		passwordTextbox.sendKeys("aaa");
+		sleepInSecond(2);
+		Assert.assertTrue(driver.findElement(By.cssSelector("li.lowercase-char.completed")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.cssSelector("li.lowercase-char.completed")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.cssSelector("li.lowercase-char.completed")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.cssSelector("li.lowercase-char.completed")).isDisplayed());
+		
+		}
 
 	@AfterClass
 	public void afterClass() {
 		//driver.quit();
+	}
+	public void sleepInSecond(long timeInSecond) {
+		try {
+			Thread.sleep(timeInSecond * 1000);
+		}catch(InterruptedException e){
+			e.printStackTrace();
+			
+		}
 	}
 }
