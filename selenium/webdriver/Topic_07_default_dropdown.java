@@ -1,8 +1,10 @@
 package webdriver;
+import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -45,7 +47,7 @@ public void TC_01_Default_Dropdown() {
     //khoi tạo select thao tac dropdown
     select= new Select(driver.findElement(By.cssSelector("select[name='DateOfBirthDay']")));
     //chọn item có text = 13
-    select.deselectByVisibleText("13");
+    select.selectByVisibleText("13");
     //làm sao biết chọn 13 rồi verify
    
    // Assert.assertEquals(select.getFirstSelectedOption().getText(), "13");
@@ -55,12 +57,14 @@ public void TC_01_Default_Dropdown() {
     //DateOfBirthMonth
     
     select= new Select(driver.findElement(By.cssSelector("select[name='DateOfBirthMonth']")));
-    select.deselectByVisibleText("May");
+    select.selectByVisibleText("May");
     
     select= new Select(driver.findElement(By.cssSelector("select[name='DateOfBirthYear']")));
-    select.deselectByVisibleText("1993");
+    select.selectByVisibleText("1993");
     
-    driver.findElement(By.cssSelector("input#Email")).sendKeys("xuyennt6"+ rand.nextInt(99999) +"@fpt.com.vn");
+    String emailAddress = "xuyennt"+ rand.nextInt(99999) +"@gmail.com";
+    
+    driver.findElement(By.cssSelector("input#Email")).sendKeys(emailAddress);
     
     driver.findElement(By.cssSelector("input#Company")).sendKeys("FPT");
     driver.findElement(By.cssSelector("input#Password")).sendKeys("123456");
@@ -72,8 +76,8 @@ public void TC_01_Default_Dropdown() {
     Assert.assertEquals(driver.findElement(By.cssSelector("div.result")).getText(), "Your registration completed");
     
     driver.findElement(By.cssSelector("a.ico-account")).click();
-    Assert.assertEquals(driver.findElement(By.cssSelector("input#FirstName")).getText(), "xuyen");
-    Assert.assertEquals(driver.findElement(By.cssSelector("input#LastName")).getText(), "nguyen");
+    Assert.assertEquals(driver.findElement(By.cssSelector("input#FirstName")).getAttribute("value"), "xuyen");
+    Assert.assertEquals(driver.findElement(By.cssSelector("input#LastName")).getAttribute("value"), "nguyen");
     
     select= new Select(driver.findElement(By.cssSelector("select[name='DateOfBirthDay']")));
     Assert.assertEquals(select.getFirstSelectedOption().getText(), "13");
@@ -82,14 +86,33 @@ public void TC_01_Default_Dropdown() {
     Assert.assertEquals(select.getFirstSelectedOption().getText(), "May");
     
     select= new Select(driver.findElement(By.cssSelector("select[name='DateOfBirthYear']")));
-    Assert.assertEquals(select.getFirstSelectedOption().getText(), "1996");
+    Assert.assertEquals(select.getFirstSelectedOption().getText(), "1993");
+    Assert.assertEquals(driver.findElement(By.cssSelector("input#Email")).getAttribute("value"), emailAddress);
     
+    Assert.assertEquals(driver.findElement(By.cssSelector("input#Company")).getAttribute("value"), "FPT");
+    
+    
+   
     
 }
 
 
 @Test
-public void TC_02_() {
+public void TC_02_Dropdown() {
+	driver.get("https://rode.com/en/support/where-to-buy");
+	select = new Select(driver.findElement(By.id("country"))) ;
+	//Vietnam
+
+	select.selectByValue("Vietnam");
+	sleepInSecond(3);
+     
+	Assert.assertEquals(select.getFirstSelectedOption().getText(), "Vietnam");
+	List<WebElement> dealers =  driver.findElements(By.cssSelector("div#map h4"));
+	
+	for(WebElement element : dealers) {
+		System.out.println(element.getText());
+	}
+	
 }
 @Test
 public void TC_03() {
@@ -100,4 +123,13 @@ public void TC_03() {
 public void afterClass() {
 driver.quit();
 	}
+
+public void sleepInSecond(long timeInSecond) {
+	try {
+		Thread.sleep(timeInSecond * 1000);
+	}catch(InterruptedException e){
+		e.printStackTrace();
+		
+	}
+}
 }
