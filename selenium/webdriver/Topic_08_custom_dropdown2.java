@@ -54,25 +54,40 @@ public void TC_01_Custom_Dropdown() {
 //	sleepInSecond(3);
 //	selectItemInCustomDropdown("span#number-button","ul#number-menu div","3");
 //	sleepInSecond(3);
-	driver.findElement(By.cssSelector("span#number-button")).click();
-	explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("ul#number-menu div")));
-	//luu tru all cac item lai thi moi duyet qua duoc
-	List<WebElement> allItems = driver.findElements(By.cssSelector("ul#number-menu div"));
-	for(WebElement item : allItems) {
-		//lay ra text
-		String textiItem = item.getText();
-		//kiem tra neu no bang voi text minh mong muon thi click
-		if(textiItem.equals("7")) {
-			item.click();
-		}
-	}
+//	driver.findElement(By.cssSelector("span#number-button")).click();
+//	explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("ul#number-menu div")));
+//	//luu tru all cac item lai thi moi duyet qua duoc
+//	List<WebElement> allItems = driver.findElements(By.cssSelector("ul#number-menu div"));
+//	for(WebElement item : allItems) {
+//		//lay ra text
+//		String textiItem = item.getText();
+//		//kiem tra neu no bang voi text minh mong muon thi click
+//		if(textiItem.equals("7")) {
+//			item.click();
+//		}
+//	}
 	
+	customDropdown("span#number-button","ul#number-menu div","7");
+	sleepInSecond(3);
+	customDropdown("span#number-button","ul#number-menu div","5");
+	sleepInSecond(3);
+	customDropdown("span#number-button","ul#number-menu div","3");
+	sleepInSecond(3);
 
 }
 
 
 @Test
-public void TC_02_Dropdown() {
+public void TC_02_Dropdown_Honda() {
+	
+	driver.get("https://www.honda.com.vn/o-to/du-toan-chi-phi");
+	//button#selectize-input
+	customDropdown("button#selectize-input", "button#selectize-input+div>a", "CIVIC E (Trắng ngọc)");
+//	sleepInSecond(3);
+//	customDropdown("button#selectize-input","button#selectize-input+div>a","CITY L");
+//	sleepInSecond(3);
+	
+
 	
 	
 }
@@ -105,6 +120,25 @@ driver.quit();
 //	}
 //	}
 //}
+
+public void customDropdown(String parentLocator, String childLocator, String textExpectedItem) {
+	driver.findElement(By.cssSelector(parentLocator)).click();
+	explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(childLocator)));
+	//luu tru all cac item lai thi moi duyet qua duoc
+	List<WebElement> allItems = driver.findElements(By.cssSelector(childLocator));
+	for(WebElement item : allItems) {
+		//lay ra text
+		String textActualItem = item.getText();
+		//kiem tra neu no bang voi text minh mong muon thi click
+		if(textActualItem.equals(textExpectedItem)) {
+			item.click();
+			
+			// khi da tim thay va thoa man dieu kien roi thi khong can duyet tiep nua
+			break;
+		}
+	}
+	
+}
 
 public void sleepInSecond(long timeInSecond) {
 	try {
