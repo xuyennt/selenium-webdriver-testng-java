@@ -91,8 +91,12 @@ public void TC_02_Jotform_Select_All() {
 	
 }
 @Test
-public void TC_03() {
-
+public void TC_03_selectAll() {
+	driver.get("https://demos.telerik.com/kendo-ui/checkbox/index");
+	sleepInSecond(5);
+	checkToCheckboxOrRadio("//label[text()='Luggage compartment cover']/preceding-sibling::input");
+	
+	
 	}
 public void checkToCheckboxOrRadio(String xpathLocator) {
 	if(!driver.findElement(By.xpath(xpathLocator)).isSelected()) {
