@@ -37,22 +37,16 @@ driver.manage().window().maximize();
 
 }
 @Test
-public void TC_01_Accept_Alert() {
+public void TC_01_Visible_Displayed_Visibility() {
 	// bước 2 nhập vào url 
-	driver.get("https://automationfc.github.io/basic-form/index.html");
-    driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
-    sleepInSecond(3);
-    alert = driver.switchTo().alert();
-    //Accept 1 Alert
-    alert.accept();
-    sleepInSecond(3);
-    Assert.assertEquals(driver.findElement(By.cssSelector("p#result")).getText(), "You clicked an alert successfully");
+	driver.get("https://www.facebook.com/");
+  
 }
 
 
 @Test
 public void TC_02_Confirm_Alert() {
-	driver.get("https://automationfc.github.io/multiple-fields/");
+	
 	
 	
 	
