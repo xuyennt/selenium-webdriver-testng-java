@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Suite">
+  <test name="Tiki web">
+  
+     <groups>
+	       <run>
+	           <include name ="Cart">
+	           
+	           </include>
+	       </run>
+     </groups>
+     <packages>
+       
+        <package name="tiki.admin"/>
+        
+     </packages>
+     
+    <classes>
+     <!-- <class name="tiki.admin.Shopper_01_Manage_Product"/>
+      <class name="tiki.admin.Shopper_02_Manage_Cart"/>
+      <class name="tiki.user.User_01_Checkout"/>
+      <class name="tiki.user.User_02_Oder"/>-->
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
