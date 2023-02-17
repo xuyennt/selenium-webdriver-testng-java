@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite parallel="false" name="Suite">
-  <test name="Tiki web">
   
-     <groups>
+  
+    <!-- <groups>
 	       <run>
 	           <include name ="Cart">
-	          <!-- dsdsd-->
+	           
 	           </include>
 	       </run>
      </groups>
@@ -13,13 +13,17 @@
        
         <package name="tiki.admin"/>
         
-     </packages>
-     
-    <classes>
-     <!-- <class name="tiki.admin.Shopper_01_Manage_Product"/>
-      <class name="tiki.admin.Shopper_02_Manage_Cart"/>
-      <class name="tiki.user.User_01_Checkout"/>
-      <class name="tiki.user.User_02_Oder"/>-->
-    </classes>
-  </test> <!-- Test -->
+     </packages>-->
+   <test name="Run on FIREFOX">
+        <parameter name ="browser" value="firefox" />
+	    <classes>
+	      <class name="TestNG.Topic_05_Parameter"/>
+	    </classes>
+  </test> 
+  <test name="Run on CHROME">
+        <parameter name ="browser" value="chrome" />
+	    <classes>
+	      <class name="TestNG.Topic_05_Parameter"/>
+	    </classes>
+  </test> 
 </suite> <!-- Suite -->
